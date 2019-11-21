@@ -545,6 +545,13 @@ typedef NS_ENUM(NSUInteger, FLEXExplorerMode) {
     }
     self.outlineViewsForVisibleViews = newOutlineViewsForVisibleViews;
     self.selectedView = [self viewForSelectionAtPoint:selectionPointInWindow];
+    NSString *selectedViewDescription = self.explorerToolbar.selectedViewDescription;
+    NSRange inScreenRange = [selectedViewDescription rangeOfString:@"\nInScreen"];
+    if (inScreenRange.location != NSNotFound) {
+        selectedViewDescription = [selectedViewDescription substringToIndex:inScreenRange.location];
+    }
+    selectedViewDescription = [NSString stringWithFormat:@"%@\nInScreen {(%1.f,%1.f)} ", selectedViewDescription, selectionPointInWindow.x, selectionPointInWindow.y];
+    self.explorerToolbar.selectedViewDescription = selectedViewDescription;
     
     // Make sure the explorer toolbar doesn't end up behind the newly added outline views.
     [self.view bringSubviewToFront:self.explorerToolbar];

@@ -80,6 +80,7 @@
         [self.selectedViewDescriptionSafeAreaContainer addSubview:self.selectedViewColorIndicator];
         
         self.selectedViewDescriptionLabel = [UILabel new];
+        self.selectedViewDescriptionLabel.numberOfLines = 2;
         self.selectedViewDescriptionLabel.backgroundColor = UIColor.clearColor;
         self.selectedViewDescriptionLabel.font = [[self class] descriptionLabelFont];
         [self.selectedViewDescriptionSafeAreaContainer addSubview:self.selectedViewDescriptionLabel];
@@ -229,7 +230,7 @@
 
 + (CGFloat)descriptionLabelHeight
 {
-    return ceil([[self descriptionLabelFont] lineHeight]);
+    return ceil([[self descriptionLabelFont] lineHeight]) * 2 + 10.0;
 }
 
 + (CGFloat)descriptionVerticalPadding
